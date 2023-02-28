@@ -1,8 +1,10 @@
 const express = require("express");
 const UserRouter = require("./user.route");
+const MovieRouter = require("./movie.route");
 
-const UserAPIRouter = express.Router();
+const APIRouter = express.Router();
 
-UserAPIRouter.use("/users", UserRouter);
+APIRouter.use("/users",UserRouter);
+APIRouter.use("/movies",MovieRouter);
 
-module.exports = UserAPIRouter;
+module.exports = APIRouter;
