@@ -5,7 +5,6 @@ const { THE_MOVIE_DB_API_TOKEN } = require("../config/config");
 
 exports.makeApiCall = async (url, method, body, stream = false) => {
   try {
-    console.log(body)
     const options = body ? {
       method: method,
       headers: {
