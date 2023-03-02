@@ -5,5 +5,6 @@ const MovieRouter = express.Router();
 
 MovieRouter.get("/", MovieController.get_movie_list);
 MovieRouter.get("/get_genres", MovieController.get_genres_list);
+MovieRouter.get("/searchMovies", MovieController.search_movies);
 
 module.exports = MovieRouter;
