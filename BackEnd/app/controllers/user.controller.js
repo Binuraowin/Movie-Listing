@@ -42,3 +42,21 @@ dataSource
         return makeResponse(res, 409, true, "", "User Create false");
     })
   });
+
+  exports.signUp = asyncHandler(async (req, res) => {
+    dataSource
+        .initialize()
+        .then(function () {
+    
+            var UsersRepository = dataSource.getRepository("Users")
+            UsersRepository
+                .findOneBy({email:req.body.email,password:req.body.password})
+                .then(function (fetchedUsers) {
+                  return makeResponse(res, 200, true, fetchedUsers, "User fetched successfully");
+                })
+        })
+        .catch(function (error) {
+            console.log("Error: ", error)
+            return makeResponse(res, 409, true, "", "User fetched false");
+        })
+      });
