@@ -1,9 +1,12 @@
 const express = require("express");
-const APIRouter = require("./app/routes/api.route");
 const { checkToken } = require("./app/middleware/middlewares");
+var typeorm = require("typeorm")
 const config = require("./app/config/config")
+const APIRouter = require("./app/routes/api.route");
 require("dotenv").config({path: __dirname + '/.env'});
 const cors = require("cors");
+// const {dataSource} = require('./app/config/mongodbConfig')
+
 
 const PORT = process.env.PORT || 3005;
 const app = express()
@@ -13,6 +16,27 @@ const app = express()
 app.use(express.json());
 
 app.use(cors());
+
+// let dataSource = new typeorm.DataSource({
+//   type: "mysql",
+//   host: "localhost",
+//   port: 3306,
+//   username: "root",
+//   password: "",
+//   database: "movielister",
+//   synchronize: true,
+//   entities: [require("./app/models/user.model")],
+//   keepConnectionAlive : true
+// })
+
+// dataSource
+//     .initialize()
+//     .then(function () {
+//       console.log("DataBase Initialization Success")
+//     })
+//     .catch(function (error) {
+//         console.log("Error: ", error)
+//     })
 
 app.use(
   "/api/movie-list",
