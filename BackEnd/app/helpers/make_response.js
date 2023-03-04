@@ -18,7 +18,7 @@ exports.makeResponse = (res, status, success, data, message) => {
         success: success,
         data: data,
         message: message,
-        service: "spades admin bff",
+        service: "Movie Lister",
     };
     if (res.req.external_service_status) {
         dataToSend.external_service_status = res.req.external_service_status;
