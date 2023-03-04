@@ -17,3 +17,8 @@ exports.getMovieList = async () => {
     const response = await makeApiCall(`${BASE_URL}/search/movie?api_key=${config.PROCESS_ENV.THE_MOVIE_DB_API_KEY}&page=1&include_adult=false&query=${data}`, "GET", null);
     return response;
   };
+
+  exports.getMovieById = async (id) => {
+    const response = await makeApiCall(`${BASE_URL}/movie/${id}?api_key=${config.PROCESS_ENV.THE_MOVIE_DB_API_KEY}&language=en-US`, "GET", null);
+    return response;
+  };
