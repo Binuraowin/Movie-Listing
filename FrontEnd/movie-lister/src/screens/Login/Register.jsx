@@ -1,6 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 import { redirect } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function Register() {
   const [firstName, setFirstName] = useState('')
@@ -10,10 +11,8 @@ export default function Register() {
   const [error, setError] = useState('')
   const [confirmPassowrd, setconfirmPassowrd] = useState('')
 
-  const onSignUpClick = () => {
-    console.log(password, email)
-    // history.push('/signup');
-  };
+  let navigate = useNavigate(); 
+
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -47,7 +46,7 @@ export default function Register() {
       setPassword('')
       setconfirmPassowrd('')
       console.log('new user added:', json)
-      redirect("/movie_detail/550")
+      navigate("/movie_detail/550")
     }
 
   }

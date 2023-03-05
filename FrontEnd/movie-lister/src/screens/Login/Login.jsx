@@ -1,12 +1,15 @@
 import React from 'react';
 import { redirect } from "react-router-dom";
 import { useState } from 'react';
+import { useNavigate } from "react-router-dom";
 
 
 export default function Login() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
+
+  let navigate = useNavigate(); 
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -35,14 +38,14 @@ export default function Login() {
       setEmail('')
       setPassword('')
       console.log('user fetched:', json)
-      redirect("/movie_detail/550")
+      navigate("/movie_detail/550")
     }
 
   }
 
   const onSignUpClick = (data) => {
     console.log('onSignUpClick')
-    return redirect("/login");
+    navigate("/signup")
 
   };
 
