@@ -13,7 +13,7 @@ follow the below path
 4.`npm run start`
 
 
-## For FrontEnd
+## For BackEnd
 
 1.`cd BackEnd`
 
