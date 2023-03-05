@@ -1,10 +1,29 @@
 import './App.css';
+import {
+  createBrowserRouter, 
+  createRoutesFromElements,
+  Route, 
+  RouterProvider
+} from 'react-router-dom'
+import Login from './screens/Login/Login';
+import Register from './screens/Login/Register';
+import MovieDetail from './screens/Movie/MovieDetails';
+import MovieList from './screens/Movie/MovieList';
+
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <Route path="/" >
+      <Route index element={<Login />} />
+      <Route path="signup" element={<Register />} /> 
+      <Route path="movie_list" element={<MovieList />} /> 
+      <Route path="movie_detail/:id" element={<MovieDetail />} /> 
+    </Route>
+  )
+)
 
 function App() {
   return (
-    <div className="App">
-      <h1>Movie List Login</h1>
-    </div>
+    <RouterProvider router={router} />
   );
 }
 
