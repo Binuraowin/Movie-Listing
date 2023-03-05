@@ -21,7 +21,7 @@ follow the below path
 
 3.copy .example and paste it to .env
 
-4.import `movielister_users.sql`
+4.import `movielister_users.sql` to mysql server
 
 4.`nodemon index.js`
 
