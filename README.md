@@ -19,9 +19,9 @@ follow the below path
 
 2.`npm i`
 
-3. copy .env.example and paste it to .env
+3.  copy .example and paste it to .env
 
-4. 
+4. import `movielister_users.sql`
 
 4.`nodemon index.js`
 
