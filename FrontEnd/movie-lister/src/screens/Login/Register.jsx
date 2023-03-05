@@ -47,7 +47,7 @@ export default function Register() {
       setPassword('')
       setconfirmPassowrd('')
       console.log('new user added:', json)
-      redirect("movie_detail/550")
+      redirect("/movie_detail/550")
     }
 
   }
