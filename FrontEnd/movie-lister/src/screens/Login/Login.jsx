@@ -1,15 +1,52 @@
 import React from 'react';
+import { redirect } from "react-router-dom";
+import { useState } from 'react';
+import { useNavigate } from "react-router-dom";
+
 
 export default function Login() {
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [error, setError] = useState('')
 
-  const onSubmitClick = (data) => {
-    console.log('onSubmitClick')
-    // history.push('/signup');
-  };
+  let navigate = useNavigate(); 
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+
+    const user = {
+      email: email,
+      password: password
+    }
+
+
+    const response = await fetch('/movie-list/users/signup', {
+      method: 'POST',
+      body: JSON.stringify(user),
+      headers: {
+        Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJpZCI6InRoaXMgYXBpIGNhbGxlZHMifQ.uqz671Y8cTqF1ivIpGVfN5p83HmRMaspBNdffOw-ZXI`,
+        "Content-Type": "application/json;charset=utf-8",
+      }
+    })
+    const json = await response.json()
+
+    if (!response.ok) {
+      setError(json.error)
+    }
+    if (response.ok) {
+      setError(null)
+      setEmail('')
+      setPassword('')
+      console.log('user fetched:', json)
+      navigate("/movie_detail/550")
+    }
+
+  }
 
   const onSignUpClick = (data) => {
     console.log('onSignUpClick')
-    // history.push('/signup');
+    navigate("/signup")
+
   };
 
   return (
@@ -18,15 +55,16 @@ export default function Login() {
         <h1 className="text-3xl font-semibold text-zinc-500">
           Login
         </h1>
-        <form className="mt-6">
+        <form className="mt-6" onSubmit={handleSubmit}>
           <div className="mb-2">
             <label
-              for="email"
               className="block text-sm font-bold text-zinc-800"
             >
               Email
             </label>
             <input
+              onChange={(e) => setEmail(e.target.value)}
+              value={email}
               type="email"
               className="block w-full px-4 py-2 mt-2 text-zinc-500 bg-white border rounded-md focus:border-zinc-500 focus:ring-zinc-500 focus:outline-none focus:ring focus:ring-opacity-40"
             />
@@ -35,7 +73,6 @@ export default function Login() {
             <div className="mb-2 flex justify-between">
 
               <label
-                for="password"
                 className="block text-sm font-bold text-zinc-800"
               >
                 Password
@@ -49,16 +86,15 @@ export default function Login() {
 
             </div>
             <input
+              onChange={(e) => setPassword(e.target.value)}
+              value={password}
               type="password"
               className="block w-full px-4 py-2 mt-2 text-zinc-500 bg-white border rounded-md focus:border-zinc-500 focus:ring-zinc-500 focus:outline-none focus:ring focus:ring-opacity-40"
             />
           </div>
           <div className="mt-6">
-            <button 
-            onClick={() => {
-              onSubmitClick();
-            }}
-            className="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-zinc-500 rounded-md hover:bg-zinc-600 focus:outline-none focus:bg-zinc-600">
+            <button
+              className="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-zinc-500 rounded-md hover:bg-zinc-600 focus:outline-none focus:bg-zinc-600">
               Login
             </button>
           </div>
@@ -68,9 +104,10 @@ export default function Login() {
           ------Whats new ?--------
         </p>
         <div className="mt-6">
-          <button onClick={() => {
-            onSignUpClick();
-          }}
+          <button
+            onClick={() => {
+              onSignUpClick();
+            }}
             className="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-zinc-500 rounded-md hover:bg-zinc-600 focus:outline-none focus:bg-zinc-600">
             Sign Up
           </button>
